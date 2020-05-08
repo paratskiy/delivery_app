@@ -1,5 +1,16 @@
+AllCops:
+  Exclude:
+    - '**/node_modules/**/*'
+    - 'bin/bundle'
+    - 'spec/rails_helper.rb'
+    - 'test/channels/application_cable/connection_test.rb'
+    - 'test/test_helper.rb'
+    
 Style/FrozenStringLiteralComment:
   Enabled: false
 
 Style/Documentation:
   Enabled: false
+
+Metrics/LineLength:
+    IgnoredPatterns: ['(\A|\s)#']
