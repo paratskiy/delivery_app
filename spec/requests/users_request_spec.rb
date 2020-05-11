@@ -13,7 +13,7 @@ RSpec.describe 'Users', type: :request do
       get signup_path
       expect(response).to render_template(:new)
       post users_path, params: { user: user_params }
-      assert_template 'users/new'
+      expect(response).to render_template(:new)
     end
 
     it 'creates a User and redirects to the User page' do
@@ -22,6 +22,7 @@ RSpec.describe 'Users', type: :request do
       post users_path, params: { user: FactoryBot.attributes_for(:user) }
       expect(User.count).to eq(1)
       expect(response).to redirect_to(assigns(:user))
+      expect(flash[:success]).to match('Welcome to Delivery App!')
     end
   end
 end
