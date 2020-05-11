@@ -14,6 +14,8 @@ RSpec.describe 'Users', type: :request do
       expect(response).to render_template(:new)
       post users_path, params: { user: user_params }
       expect(response).to render_template(:new)
+      assert_select 'div#error_explanation'
+      assert_select 'div.field_with_errors'
     end
 
     it 'creates a User and redirects to the User page' do
