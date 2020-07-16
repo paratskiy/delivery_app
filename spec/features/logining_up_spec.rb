@@ -19,7 +19,10 @@ RSpec.feature 'Logining Up', type: :feature do
     fill_in :session_password, with: ''
     click_button 'Log in'
     expect(current_path).to eq '/login'
+    expect(page).to have_selector('.alert-danger')
     expect(page).to have_link(nil, href: '/signup')
     expect(page).to have_selector(:button, 'Log in')
+    visit root_path
+    expect(page).not_to have_selector('.alert-danger')
   end
 end
