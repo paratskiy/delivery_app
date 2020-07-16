@@ -3,4 +3,8 @@
     .container
       %nav
         %ul.nav.navbar-nav.navbar-right
-          %li= link_to "Log in", '#'
+          - if logged_in?
+            %li= link_to "Log out", :logout, method: "delete"
+          - else
+            %li= link_to "Log in", :login
+          
