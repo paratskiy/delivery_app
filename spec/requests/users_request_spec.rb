@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
   let(:user) { FactoryBot.create(:user) }
+  let(:user_params) { FactoryBot.attributes_for(:user) }
 
   describe 'GET /new' do
     it 'returns http success' do
@@ -10,7 +11,6 @@ RSpec.describe 'Users', type: :request do
     end
 
     it 'invalid signup information' do
-      user_params = FactoryBot.attributes_for(:user)
       user_params[:name] = ''
       get signup_path
       expect(response).to render_template(:new)
@@ -23,10 +23,12 @@ RSpec.describe 'Users', type: :request do
     it 'creates a User and redirects to the User page' do
       get signup_path
       expect(response).to render_template(:new)
-      post users_path, params: { user: FactoryBot.attributes_for(:user) }
+      post users_path, params: { user: user_params }
       expect(User.count).to eq(1)
       expect(response).to redirect_to(assigns(:user))
       expect(flash[:success]).to match('Welcome to Delivery App!')
+      assert_select 'a[href=?]', login_path, count: 0
+      expect(is_logged_in?).to be true
     end
   end
 

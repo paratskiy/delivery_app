@@ -7,7 +7,7 @@ RSpec.describe SessionsHelper, type: :helper do
 
   it 'current_user returns right user when session is nil' do
     expect(user).to eq current_user
-    expect(is_logged_in?)
+    expect(is_logged_in?).to be true
   end
 
   it 'current_user returns nil when remember_digest is wrong' do
