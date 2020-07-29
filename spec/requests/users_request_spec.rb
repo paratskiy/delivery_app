@@ -52,7 +52,7 @@ RSpec.describe 'Users', type: :request do
 
     it 'login with remembering' do
       log_in_as(user, remember_me: '1')
-      expect(cookies['remember_token']).not_to be_nil
+      expect(cookies['remember_token']).to eq assigns(:user).remember_token
     end
 
     it 'login without remembering' do
