@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.feature 'Logining Up', type: :feature do
   let(:user) { FactoryBot.create(:user) }
 
+  before { visit login_path }
+
   it 'login me up' do
-    visit login_path
     fill_in :session_email, with: user.email
     fill_in :session_password, with: user.password
     click_button 'Log in'
@@ -14,7 +15,6 @@ RSpec.feature 'Logining Up', type: :feature do
   end
 
   it 'with invalid login information' do
-    visit login_path
     fill_in :session_email, with: ''
     fill_in :session_password, with: ''
     click_button 'Log in'

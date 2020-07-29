@@ -17,6 +17,21 @@ include ApplicationHelper
 def is_logged_in?
   !session[:user_id].nil?
 end
+
+def log_in_as(user, options = {})
+  remember_me = options[:remember_me] || '1'
+  if integration_test?
+    post login_path, params: { session: { email: user.email,
+                                          password: user.password,
+                                          remember_me: remember_me }}
+  else
+    session[:user_id] = user.id
+  end
+end
+
+def integration_test?
+  defined?(post_via_redirect)
+end
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
