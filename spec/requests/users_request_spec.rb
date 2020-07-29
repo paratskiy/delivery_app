@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
+  let(:user) { FactoryBot.create(:user) }
+
   describe 'GET /new' do
     it 'returns http success' do
       get signup_path
@@ -25,6 +27,37 @@ RSpec.describe 'Users', type: :request do
       expect(User.count).to eq(1)
       expect(response).to redirect_to(assigns(:user))
       expect(flash[:success]).to match('Welcome to Delivery App!')
+    end
+  end
+
+  describe 'login' do
+    it 'login with valid information followed by logout' do
+      log_in_as(user)
+      expect(is_logged_in?).to be true
+      expect(response).to redirect_to user
+      follow_redirect!
+      expect(response).to render_template('users/show')
+      assert_select 'a[href=?]', login_path, count: 0
+      assert_select 'a[href=?]', logout_path
+      assert_select 'a[href=?]', user_path(user)
+      delete logout_path
+      expect(is_logged_in?).to be false
+      expect(response).to redirect_to root_url
+      delete logout_path
+      follow_redirect!
+      assert_select 'a[href=?]', login_path
+      assert_select 'a[href=?]', logout_path, count: 0
+      assert_select 'a[href=?]', user_path(user), count: 0
+    end
+
+    it 'login with remembering' do
+      log_in_as(user, remember_me: '1')
+      expect(cookies['remember_token']).not_to be_nil
+    end
+
+    it 'login without remembering' do
+      log_in_as(user, remember_me: '0')
+      expect(cookies['remember_token']).to be_nil
     end
   end
 end

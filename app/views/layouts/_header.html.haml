@@ -1,6 +1,39 @@
-%body
-  %header.navbar.navbar-fixed-top.navbar-inverse
-    .container
-      %nav
-        %ul.nav.navbar-nav.navbar-right
-          %li= link_to "Log in", '#'
+-# %nav.navbar.navbar-expand-lg.navbar-light.navbar-fixed-top.navbar-inverse.navbar-dark.bg-dark
+-#   = link_to "sample app", root_path, id: "logo", class: 'navbar-brand'
+-#   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", type: "button"}
+-#     %span.navbar-toggler-icon
+-#   #navbarSupportedContent.collapse.navbar-collapse
+-#     %ul.navbar-nav.ml-auto
+-#       %li.nav-item= link_to "Home", root_path, class: 'nav-link'
+-#       - if logged_in?
+-#         %li.nav-item= link_to "Users", users_path, class: 'nav-link'
+-#         %li.nav-item.dropdown
+-#           %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
+-#             Account
+-#           .dropdown-menu{"aria-labelledby" => "navbarDropdown", "class" => "bg-dark"}
+-#             .dropdown-item= link_to "Profile", current_user, class: 'nav-link'
+-#             .dropdown-item= link_to "Settings", edit_user_path(current_user), class: 'nav-link'
+-#             .dropdown-divider
+-#             .dropdown-item= link_to "Log out", :logout, method: :delete, class: 'nav-link'
+-#       - else
+-#         %li.nav-item= link_to "Log in", :login, class: 'nav-link'
+
+%nav.navbar.navbar-expand-md.navbar-fixed-top.navbar-inverse.navbar-dark.bg-dark
+  = link_to "sample app", root_path, id: "logo", class: 'navbar-brand'
+  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    %ul.nav.navbar-nav.navbar-right.mr-auto
+      %li.nav-item= link_to "Home", root_path, class: 'nav-link'
+      - if logged_in?
+        %li.nav-item= link_to "Users", users_path, class: 'nav-link'
+        %li.nav-item.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :class => 'nav-link dropdown-toggle'}
+            Account
+          %ul.navbar-nav.dropdown-menu.bg-dark
+            %li.dropdown-item= link_to "Profile", current_user, class: 'nav-link'
+            %li.dropdown-item= link_to "Settings", edit_user_path(current_user), class: 'nav-link'
+            %li.dropdown-divider
+            %li.dropdown-item= link_to "Log out", :logout, method: :delete, class: 'nav-link'
+      - else
+        %li.nav-item= link_to "Log in", :login, class: 'nav-link' 

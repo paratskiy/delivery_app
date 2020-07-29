@@ -9,6 +9,7 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     = render 'layouts/header'
-    - flash.each do |message_type, message|
-      %div{:class => "alert alert-#{message_type}"}= message
-    = yield
+    .container
+      - flash.each do |message_type, message|
+        %div{:class => "alert alert-#{message_type}"}= message
+      = yield
