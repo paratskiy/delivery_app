@@ -27,7 +27,10 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
 # Use HAML for views
 gem 'haml', '~> 5.1', '>= 5.1.2'
-
+# A simple API for performing paginated queries with Active Record
+gem 'will_paginate', '~> 3.3'
+# Hooks into will_paginate to format the html to match Twitter Bootstrap styling.
+gem 'bootstrap-will_paginate', '~> 1.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

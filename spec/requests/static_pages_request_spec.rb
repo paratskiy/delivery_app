@@ -11,11 +11,11 @@ RSpec.describe 'StaticPages', type: :request do
       get root_path
       assert_template 'static_pages/home'
       assert_select 'a[href=?]', signup_path
-      # assert_select "a[href=?]", login_path
+      assert_select 'a[href=?]', login_path
     end
   end
   describe 'GET /signup' do
-    it 'returns http success' do 
+    it 'returns http success' do
       get signup_path
       assert_select 'title', full_title('Sign up')
     end
