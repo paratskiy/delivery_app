@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.feature 'Logining Up', type: :feature do
-  let(:user) { FactoryBot.create(:user) }
+  let(:admin) { FactoryBot.create(:user) }
 
-  before { visit login_path }
+  before { visit :login }
 
   it 'login me up' do
-    fill_in :session_email, with: user.email
-    fill_in :session_password, with: user.password
+    fill_in :session_email, with: admin.email
+    fill_in :session_password, with: admin.password
     click_button 'Log in'
-    expect(current_path).to eq "/users/#{user.id}"
-    expect(page).to have_content user.name
+    expect(current_path).to eq "/users/#{admin.id}"
+    expect(page).to have_content admin.name
     expect(page).to have_content 'Log out'
   end
 
