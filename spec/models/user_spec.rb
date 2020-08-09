@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { FactoryBot.create :user }
+  let(:admin) { FactoryBot.create :user }
+  let(:other_user) { FactoryBot.create :user }
   TOO_LONG_EMAIL = "#{'a' * 255}@example.com".freeze
   TOO_LONG_NAME = ('a' * 51).to_s.freeze
   TOO_SHORT_PASS = ('a' * 5).to_s.freeze
@@ -17,7 +18,7 @@ RSpec.describe User, type: :model do
 
   context 'correct user' do
     it 'should be valid' do
-      expect(user).to be_valid
+      expect(admin).to be_valid
     end
 
     it 'should accept valid addresses' do
@@ -47,7 +48,7 @@ RSpec.describe User, type: :model do
 
   context 'with duplicate data' do
     it 'has unique email' do
-      expect(build_custom_user(email: user.email)).not_to be_valid
+      expect(build_custom_user(email: admin.email)).not_to be_valid
     end
   end
 
@@ -76,6 +77,15 @@ RSpec.describe User, type: :model do
   end
 
   it 'authenticated? should return false for a user with nil digest' do
-    expect(user.authenticated?(nil)).to be false
+    expect(admin.authenticated?(nil)).to be false
+  end
+
+  it 'should create first user as admin' do
+    expect(admin.admin?).to be true
+  end
+
+  it 'should create only first user as admin' do
+    expect(admin.admin?)
+    expect(other_user.admin?).to be false
   end
 end
