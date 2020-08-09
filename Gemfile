@@ -31,6 +31,8 @@ gem 'haml', '~> 5.1', '>= 5.1.2'
 gem 'will_paginate', '~> 3.3'
 # Hooks into will_paginate to format the html to match Twitter Bootstrap styling.
 gem 'bootstrap-will_paginate', '~> 1.0'
+# Ffaker generates dummy data.
+gem 'ffaker', '~> 2.14'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -66,8 +68,6 @@ group :test do
   gem 'capybara', '>= 2.15'
   # Strategies for cleaning databases. Can be used to ensure a clean slate for testing.
   gem 'database_cleaner', '~> 1.8', '>= 1.8.5'
-  # Ffaker generates dummy data.
-  gem 'ffaker', '~> 2.14'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
