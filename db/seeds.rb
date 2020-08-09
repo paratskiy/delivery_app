@@ -12,7 +12,7 @@ User.create!(name: 'paratskiy',
 
 99.times do |_n|
   name = FFaker::Name.name
-  email = FFaker::Internet.email
+  email = FFaker::Internet.unique.email
   password = FFaker::Internet.password
   User.create!(name: name,
                email: email,
